@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { REST, Routes } from "discord.js";
 import dice from "./commands/dice.js";
 import team from "./commands/team.js";

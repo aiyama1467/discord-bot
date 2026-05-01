@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { Client, GatewayIntentBits, Collection, Events } from "discord.js";
 import type { Command } from "./types.js";
 import dice from "./commands/dice.js";
