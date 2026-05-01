@@ -1,31 +1,38 @@
 {
-  "name": "discord-bot",
-  "version": "1.0.0",
-  "description": "",
-  "type": "module",
-  "main": "dist/index.js",
-  "scripts": {
-    "dev": "tsx watch src/index.ts",
-    "build": "tsc",
-    "start": "node dist/index.js",
-    "deploy": "tsx src/deploy-commands.ts"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "packageManager": "pnpm@10.17.1",
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild"
-    ]
-  },
-  "dependencies": {
-    "discord.js": "^14.26.3",
-    "dotenv": "^17.4.2"
-  },
-  "devDependencies": {
-    "@types/node": "^25.6.0",
-    "tsx": "^4.21.0",
-    "typescript": "^6.0.3"
-  }
+	"name": "discord-bot",
+	"version": "1.0.0",
+	"description": "",
+	"type": "module",
+	"main": "dist/index.js",
+	"scripts": {
+		"dev": "tsx watch src/index.ts",
+		"build": "tsc",
+		"start": "node dist/index.js",
+		"deploy": "tsx src/deploy-commands.ts",
+		"lint": "biome lint .",
+		"format": "biome format --write .",
+		"check": "biome check --write .",
+		"prepare": "lefthook install"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"packageManager": "pnpm@10.17.1",
+	"pnpm": {
+		"onlyBuiltDependencies": [
+			"esbuild",
+			"lefthook"
+		]
+	},
+	"dependencies": {
+		"discord.js": "^14.26.3",
+		"dotenv": "^17.4.2"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.4.13",
+		"@types/node": "^25.6.0",
+		"lefthook": "^2.1.6",
+		"tsx": "^4.21.0",
+		"typescript": "^6.0.3"
+	}
 }
