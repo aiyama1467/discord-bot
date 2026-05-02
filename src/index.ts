@@ -1,6 +1,7 @@
 import "dotenv/config";
 import { Client, Collection, Events, GatewayIntentBits } from "discord.js";
 import dice from "./commands/dice.js";
+import remind from "./commands/remind.js";
 import team from "./commands/team.js";
 import registerGuildMemberAdd from "./events/guildMemberAdd.js";
 import registerMessageCreate from "./events/messageCreate.js";
@@ -20,7 +21,7 @@ const client = new Client({
 });
 
 const commands = new Collection<string, Command>();
-for (const cmd of [dice, team]) {
+for (const cmd of [dice, team, remind]) {
 	commands.set(cmd.data.name, cmd);
 }
 
