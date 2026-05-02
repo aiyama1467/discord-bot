@@ -1,6 +1,7 @@
 import "dotenv/config";
 import { REST, Routes } from "discord.js";
 import dice from "./commands/dice.js";
+import remind from "./commands/remind.js";
 import team from "./commands/team.js";
 
 const token = process.env.BOT_TOKEN;
@@ -13,7 +14,7 @@ if (!token || !clientId) {
 
 const rest = new REST().setToken(token);
 
-const commands = [dice, team].map((cmd) => cmd.data.toJSON());
+const commands = [dice, team, remind].map((cmd) => cmd.data.toJSON());
 
 console.log(`Deploying ${commands.length} command(s)...`);
 
