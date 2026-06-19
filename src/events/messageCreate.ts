@@ -1,4 +1,5 @@
 import { type Client, Events, type Message } from "discord.js";
+import { askWithSearch } from "../lib/bedrock.js";
 
 // Per-user message timestamps for spam detection
 const messageTimes = new Map<string, number[]>();
@@ -27,10 +28,37 @@ async function handleSpam(message: Message<true>): Promise<void> {
 	);
 }
 
+async function handleAsk(
+	message: Message<true>,
+	client: Client,
+): Promise<void> {
+	const question = message.content.replace(/<@!?\d+>/g, "").trim();
+	if (!question) return;
+
+	await message.channel.sendTyping();
+
+	try {
+		const answer = await askWithSearch(question);
+		const reply = answer.length > 1990 ? `${answer.slice(0, 1990)}…` : answer;
+		await message.reply(reply);
+	} catch (err) {
+		console.error(err);
+		await message.reply(
+			"エラーが発生しました。しばらく後にもう一度お試しください。",
+		);
+	}
+}
+
 export default function register(client: Client): void {
 	client.on(Events.MessageCreate, async (message) => {
 		if (message.author.bot) return;
 		if (!message.inGuild()) return;
+
+		const botId = client.user?.id;
+		if (botId && message.mentions.has(botId)) {
+			await handleAsk(message, client);
+			return;
+		}
 
 		if (isSpam(message.author.id)) {
 			await handleSpam(message);
